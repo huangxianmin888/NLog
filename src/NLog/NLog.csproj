@@ -39,8 +39,8 @@ For ASP.NET Core, check: https://www.nuget.org/packages/NLog.Web.AspNetCore
 
 ## Features
 - LogManager.Setup() allows fluent configuration of LogFactory options (@snakefoot + @304NotModified)
-- LogManager.Setup().SetupSerialization(s => s.RegisterObjectTransformation(...)) for overriding default property reflection (@snakefoot + @304NotModified + @Giorgi + @mmurrell)
-- LogManager.Setup().SetupSerialization(s => s.RegisterConditionMethod(...)) can use lambda methods and not just static methods (@snakefoot)
+- LogManager.Setup().SetupSerialization(s =&gt; s.RegisterObjectTransformation(...)) for overriding default property reflection (@snakefoot + @304NotModified + @Giorgi + @mmurrell)
+- LogManager.Setup().SetupSerialization(s =&gt; s.RegisterConditionMethod(...)) can use lambda methods and not just static methods (@snakefoot)
 - ${level:format=FullName} will expand Info + Warn to their full name (@snakefoot)
 - FileTarget - Supports MaxArchiveDays for cleanup of old files based on their age (@snakefoot)
 - Layout.FromMethod to create Layout directly from a lambda method (@snakefoot)
@@ -200,7 +200,7 @@ For all config options and platform support, check https://nlog-project.org/conf
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
@@ -316,10 +316,6 @@ For all config options and platform support, check https://nlog-project.org/conf
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InternalLogger-generated.cs</LastGenOutput>
     </None>
-    <None Update="Internal\LayoutHelpers-generated.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LayoutHelpers-generated.cs</LastGenOutput>
-    </None>
     <None Update="Logger-generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Logger-generated.cs</LastGenOutput>
@@ -335,11 +331,6 @@ For all config options and platform support, check https://nlog-project.org/conf
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>InternalLogger-generated.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Internal\LayoutHelpers-generated.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>LayoutHelpers-generated.tt</DependentUpon>
     </Compile>
     <Compile Update="Logger-generated.cs">
       <DesignTime>True</DesignTime>
